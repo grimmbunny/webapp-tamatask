@@ -35,7 +35,8 @@
 
         @media (prefers-reduced-motion: no-preference) {
             html {
-                interpolate-size: allow-keywords;
+                /* Enable smooth scrolling when the user has no reduced-motion preference */
+                scroll-behavior: smooth;
             }
         }
 
@@ -229,7 +230,8 @@
         .inner-grid__container {
             display: grid;
             grid-template-columns: 4fr 3fr 2fr;
-            grid-template-rows: repeat(6, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            /* Aumentado para 8 linhas */
             gap: 20px;
             position: absolute;
             width: 90%;
@@ -260,6 +262,7 @@
 
         .todowidget__container {
             grid-area: 1 / 2 / 5 / 3;
+            min-height: 400px;
         }
 
         .stats-widget__container {
@@ -267,6 +270,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
+            min-height: 450px;
         }
 
         .notes-widget__container {
@@ -276,6 +280,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            min-height: 250px;
         }
 
         /* --- Barras de Rolagem --- */
@@ -310,7 +315,6 @@
             border: 5px solid var(--cream-darker);
         }
 
-        /* 7. Botões */
         .btn-addtask {
             grid-area: 5 / 2 / 6 / 3;
             background: var(--pink);
@@ -318,6 +322,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 70px;
         }
 
         .btn-pomodoro {
@@ -329,12 +334,12 @@
             justify-content: center;
             gap: 0.5rem;
             /* Espaço entre o timer e os botões */
+            min-height: 70px;
         }
 
         .pomodoro-buttons {
             display: flex;
             gap: 1rem;
-            /* Espaço entre os botões START e RESET */
         }
 
         .pomodoro-btn {
@@ -412,7 +417,8 @@
 
         /* 9. Componente Tamagotchi */
         .tama-device__container {
-            grid-area: 1 / 1 / 7 / 2;
+            grid-area: 1 / 1 / 9 / 2;
+            /* Ajustado para 8 linhas */
             padding: 1rem;
             position: relative;
             display: flex;
@@ -576,23 +582,22 @@
 
         .stats-widget__container>.h2 {
             font-size: 30px;
-            line-height: 1.1;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
         }
 
         .stats-widget__container>.h3 {
             font-size: 20px;
-            line-height: 1.1;
+            line-height: 1.2;
         }
 
         .stats-widget__container .xp {
             font-size: 20px;
-            line-height: 1.1;
         }
 
         .stats-widget__container .stat-label {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
-            line-height: 1.1;
         }
 
         .notes-content {
@@ -607,6 +612,74 @@
             outline: 2px solid var(--deep-orange-darker);
             background-color: rgba(0, 0, 0, 0.1);
         }
+
+
+        /* --- Toast Notification --- */
+        #toast-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* justify-content: flex-end; */
+            flex: 1;
+            transition: transform 250ms ease;
+            overflow: hidden;
+        }
+
+        .toast {
+            display: flex;
+            flex: 1;
+            animation: slideUp 500ms ease forwards 1;
+            background: var(--deep-orange);
+            box-shadow: 6px 6px 0px 0px var(--deep-orange-darker);
+            border-radius: 23px;
+            padding: 1rem 2rem;
+            color: var(--yellow-orange);
+            display: inline-block;
+            z-index: 999;
+        }
+
+        .toast h2 {
+            color: var(--yellow-orange);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toast i {
+            color: var(--yellow-orange);
+        }
+
+        @keyframes slide-in {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+        }
+
+        @keyframes slide-out {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(100%);
+            }
+        }
+
+        .slide-in {
+            animation: slide-in 1s;
+
+        }
+
+        .slide-out {
+            animation: slide-out 1s;
+        }
+
 
         /* --- Interação --- */
         .btn-start,
@@ -751,12 +824,17 @@
             }
 
             .todowidget__container {
-                min-height: 300px;
+                min-height: 400px;
             }
 
             .btn-pomodoro {
                 flex-direction: column;
                 gap: 1rem;
+                min-height: 70px;
+            }
+
+            .btn-addtask {
+                min-height: 70px;
             }
 
             .device-buttons {

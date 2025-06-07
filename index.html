@@ -140,7 +140,7 @@
 
     <audio id="start-sound" src="https://www.soundjay.com/buttons/button-16.mp3" preload="auto"></audio>
     <audio id="end-sound" src="https://www.soundjay.com/misc/bell-ringing-05.mp3" preload="auto"></audio>
-
+    <div id="toast-container"></div>
     <script>
         // --- State Management ---
         const stats = { fed: 0, rest: 0, tasks: 0, focus: 0, love: 0 };
@@ -181,19 +181,41 @@
         }
 
         // --- Event Handlers ---
+        function showToast(message, icon) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast slide-in';
+            toast.innerHTML = `<h2><i class="fa-solid ${icon}"></i> ${message}</h2>`;
+            container.appendChild(toast);
+
+            const remove = () => {
+                toast.classList.remove('slide-in');
+                toast.classList.add('slide-out');
+                toast.addEventListener('animationend', () => {
+                    toast.remove();
+                }, { once: true });
+                document.removeEventListener('click', remove);
+            };
+
+            document.addEventListener('click', remove, { once: true });
+            setTimeout(remove, 3000);
+        }
+
+
         function handleSleep() {
             updateStat("rest", 10);
-            alert("🛌 Tamagotchi is now sleeping!");
+            showToast("Tamagotchi is now sleeping!", "fa-bed");
+
         }
 
         function handleLove() {
             updateStat("love", 10);
-            alert("💖 Tamagotchi feels loved!");
+            showToast("Tamagotchi feels loved!", "fa-heart");
         }
 
         function handleFeed() {
             updateStat("fed", 10);
-            alert("🍽 Tamagotchi has been fed!");
+            showToast("Tamagotchi has been fed!", "fa-utensils");
         }
 
         function handleAddTask() {
