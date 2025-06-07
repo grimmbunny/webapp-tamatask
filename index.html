@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="wireframe.css" />
 </head>
 
+
 <body>
     <div class="windowmain">
         <div class="navbar">
@@ -23,39 +24,37 @@
                 <div class="menu-icon h-grow" onclick="toggleMenu()">
                     <span></span>
                     <span></span>
+                    <span></span>
                 </div>
             </div>
         </div>
 
-
         <div class="inner-grid__container">
-
             <div class="tama-device__container">
-
-                <h1 class="h1 text-brown"> <i class="h-grow fa-solid fa-shuffle text-pink" onclick="shuffleName()"></i>
+                <h1 class="h1 text-brown">
+                    <i class="h-grow fa-solid fa-shuffle text-pink" onclick="shuffleName()"></i>
                     <span id="pet-name" class="pet-name">PET NAME!</span>
                 </h1>
-
                 <div class="device-frame">
-                    <!-- moldura do Tamagotchi -->
-                    <img src="../assets/device/device.svg" alt="Tamagotchi Shell" class="device-svg" />
-
-                    <!-- pet renderizado dentro da tela -->
+                    <img src="https://raw.githubusercontent.com/grimmbunny/webapp-tamatask/refs/heads/main/assets/device/device.svg"
+                        alt="Tamagotchi Shell" class="device-svg" onerror="this.style.display='none'" />
                     <div class="pet-screen h-grow" onclick="petReact()">
-                        <img src="../assets/device/pet.svg" alt="Pet" class="pet-svg" />
+                        <img src="https://raw.githubusercontent.com/grimmbunny/webapp-tamatask/refs/heads/main/assets/device/pet.svg"
+                            alt="Pet" class="pet-svg" onerror="this.style.display='none'" />
                     </div>
-
-                    <!-- botões do dispositivo -->
                     <div class="device-buttons">
-                        <img src="../assets/device/sleep.svg" alt="Sleep" class="btn-svg h-grow"
-                            onclick="handleSleep()" />
-                        <img src="../assets/device/love.svg" alt="Love" class="btn-svg h-grow" onclick="handleLove()" />
-                        <img src="../assets/device/food.svg" alt="Food" class="btn-svg h-grow" onclick="handleFeed()" />
+                        <img src="https://raw.githubusercontent.com/grimmbunny/webapp-tamatask/refs/heads/main/assets/device/sleep.svg"
+                            alt="Sleep" class="btn-svg h-grow" onclick="handleSleep()"
+                            onerror="this.style.display='none'" />
+                        <img src="https://raw.githubusercontent.com/grimmbunny/webapp-tamatask/refs/heads/main/assets/device/love.svg"
+                            alt="Love" class="btn-svg h-grow" onclick="handleLove()"
+                            onerror="this.style.display='none'" />
+                        <img src="https://raw.githubusercontent.com/grimmbunny/webapp-tamatask/refs/heads/main/assets/device/food.svg"
+                            alt="Food" class="btn-svg h-grow" onclick="handleFeed()"
+                            onerror="this.style.display='none'" />
                     </div>
                 </div>
-
             </div>
-
 
             <div class="todowidget__container">
                 <div class="todo-scroll">
@@ -74,31 +73,30 @@
                                 <span class="task-text text-deep-orange h3">Task name here! :)</span>
                             </label>
                         </li>
-                        <li>
-
                     </ul>
                 </div>
             </div>
-
-
-
 
             <div class="btn-addtask h-grow" onclick="handleAddTask()">
                 <h1 class="title text-yellow">ADD TASK</h1>
             </div>
 
             <div class="btn-pomodoro">
-                <h1 class="text-pink title">25:00</h1>
-                <button class="btn-start h-grow" onclick="handleStartTimer()">
-                    <h2 class="text-yellow">START</h2>
-                </button>
+                <h1 id="pomodoro-display" class="text-pink title">25:00</h1>
+                <div class="pomodoro-buttons">
+                    <button id="pomodoro-start-pause" class="pomodoro-btn h-grow" onclick="handleStartPauseTimer()">
+                        <h2 class="text-yellow">START</h2>
+                    </button>
+                    <button id="pomodoro-reset" class="pomodoro-btn h-grow" onclick="handleResetTimer()">
+                        <h2 class="text-yellow">RESET</h2>
+                    </button>
+                </div>
             </div>
 
             <div class="stats-widget__container">
                 <h2 class="h2 text-pink">STATS</h2>
                 <h3 class="text-deep-orange text-align-left">Level 5 <span class="xp text-blue h3 text-align-left"
                         id="xp">0000xp</span></h3>
-
                 <div class="stat-line">
                     <span class="stat-label h3">tasks</span>
                     <div class="stat-bar">
@@ -131,55 +129,58 @@
                 </div>
             </div>
 
-
-
-
-
             <div class="notes-widget__container">
                 <h2 class="text-cream">NOTES</h2>
-                <div class="notes-content">
-                    <p class="p text-cream">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.
-
-
+                <div class="notes-content" contenteditable="true">
+                    Type something!
                 </div>
             </div>
-
-
         </div>
     </div>
 
-
-
+    <audio id="start-sound" src="https://www.soundjay.com/buttons/button-16.mp3" preload="auto"></audio>
+    <audio id="end-sound" src="https://www.soundjay.com/misc/bell-ringing-05.mp3" preload="auto"></audio>
 
     <script>
-        const stats = {
-            fed: 0,
-            rest: 0,
-            tasks: 0,
-            focus: 0,
-            love: 0
-        };
-
+        // --- State Management ---
+        const stats = { fed: 0, rest: 0, tasks: 0, focus: 0, love: 0 };
         let xp = 0;
 
+        // Pomodoro State
+        let pomodoroInterval;
+        const pomodoroDuration = 25 * 60; // 25 minutes
+        let timeLeft = pomodoroDuration;
+        let timerRunning = false;
+
+        // --- UI Elements ---
+        const xpDisplay = document.getElementById("xp");
+        const pomodoroDisplay = document.getElementById("pomodoro-display");
+        const startPauseButton = document.getElementById("pomodoro-start-pause").querySelector("h2");
+        const startSound = document.getElementById("start-sound");
+        const endSound = document.getElementById("end-sound");
+
+        // --- Core Functions ---
         function updateStat(stat, amount) {
             stats[stat] = Math.min(stats[stat] + amount, 100);
-            document.getElementById(`stat-${stat}`).style.width = stats[stat] + '%';
+            const statBar = document.getElementById(`stat-${stat}`);
+            if (statBar) {
+                statBar.style.width = stats[stat] + '%';
+            }
             updateXP(amount);
         }
 
         function updateXP(amount) {
             xp += amount;
-            const xpText = String(xp).padStart(4, '0');
-            document.getElementById("xp").textContent = xpText + "xp";
+            xpDisplay.textContent = String(xp).padStart(4, '0') + "xp";
         }
 
+        function updateTimerDisplay() {
+            const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+            const seconds = String(timeLeft % 60).padStart(2, '0');
+            pomodoroDisplay.textContent = `${minutes}:${seconds}`;
+        }
+
+        // --- Event Handlers ---
         function handleSleep() {
             updateStat("rest", 10);
             alert("🛌 Tamagotchi is now sleeping!");
@@ -196,33 +197,65 @@
         }
 
         function handleAddTask() {
-            const task = prompt("Escreva a nova tarefa:");
-            if (task) {
+            const taskText = prompt("Escreva a nova tarefa:");
+            if (taskText && taskText.trim() !== "") {
                 const list = document.querySelector(".todo-list");
                 const li = document.createElement("li");
                 li.innerHTML = `
                     <label class="todo-item">
                         <input type="checkbox" />
                         <span class="checkmark"></span>
-                        <span class="task-text text-deep-orange h3">${task}</span>
+                        <span class="task-text text-deep-orange h3">${taskText.trim()}</span>
                     </label>`;
+
                 li.querySelector("input[type=checkbox]").addEventListener("change", function () {
-                    if (this.checked) updateStat("tasks", 10);
+                    if (this.checked) {
+                        updateStat("tasks", 10);
+                    } else {
+                        // Optional: decrease stats if task is unchecked
+                        // updateStat("tasks", -10); 
+                    }
                 });
                 list.appendChild(li);
             }
         }
 
-        function handleStartTimer() {
-            updateStat("focus", 10);
-            alert("⏱️ Pomodoro started!");
+        function handleStartPauseTimer() {
+            if (timerRunning) {
+                // It's running, so PAUSE it
+                clearInterval(pomodoroInterval);
+                timerRunning = false;
+                startPauseButton.textContent = "START";
+            } else {
+                // It's paused or stopped, so START it
+                timerRunning = true;
+                startPauseButton.textContent = "PAUSE";
+                if (timeLeft === pomodoroDuration) startSound.play(); // Play sound only on fresh start
+
+                pomodoroInterval = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(pomodoroInterval);
+                        timerRunning = false;
+                        startPauseButton.textContent = "START";
+                        updateStat("focus", 10);
+                        alert("⏰ Tempo encerrado! Foque concluído!");
+                        endSound.play();
+                        timeLeft = pomodoroDuration; // Reset for next run
+                        updateTimerDisplay();
+                    }
+                }, 1000);
+            }
         }
 
-        document.querySelectorAll(".todo-item input[type=checkbox]").forEach(el => {
-            el.addEventListener("change", function () {
-                if (this.checked) updateStat("tasks", 10);
-            });
-        });
+        function handleResetTimer() {
+            clearInterval(pomodoroInterval);
+            timerRunning = false;
+            timeLeft = pomodoroDuration;
+            updateTimerDisplay();
+            startPauseButton.textContent = "START";
+        }
 
         function toggleMenu() {
             alert("☰ Menu toggled!");
@@ -237,12 +270,20 @@
                 "Bubbles", "Miki", "Neko", "Lulu", "Zuzu", "Koko", "Fafa", "Toto", "Peachy", "Momo",
                 "Pipoca", "Kiki", "Bibi", "Tama", "Chibi", "Luna", "Coco", "Nina", "Bunbun", "Pixie"
             ];
-            const random = names[Math.floor(Math.random() * names.length)];
-            document.getElementById("pet-name").textContent = random + "!";
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            document.getElementById("pet-name").textContent = randomName + "!";
         }
+
+        // --- Initial Setup ---
+        // Attach event listener to pre-existing tasks
+        document.querySelectorAll(".todo-list .todo-item input[type=checkbox]").forEach(el => {
+            el.addEventListener("change", function () {
+                if (this.checked) {
+                    updateStat("tasks", 10);
+                }
+            });
+        });
     </script>
-
-
 </body>
 
 </html>
