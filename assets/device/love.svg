@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83.29 83.29">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e84759;
+        stroke: #ca0219;
+        stroke-width: 7px;
+      }
+
+      .cls-2 {
+        fill: #ca0219;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="love">
+      <circle class="cls-1" cx="41.65" cy="41.65" r="38.15"/>
+      <path class="cls-2" d="M42.3,30.77s-.03.02-.04,0c-5.75-9.83-21.84-6.94-21.84,5.41,0,8.14,9.5,16.89,20.33,27.41.42.41.97.62,1.52.62s1.1-.21,1.52-.62c10.88-10.56,20.33-19.26,20.33-27.41,0-12.4-16.13-15.17-21.84-5.41Z"/>
+    </g>
+  </g>
+</svg>

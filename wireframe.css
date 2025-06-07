@@ -1,0 +1,708 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+:root {
+    /* Cores */
+    --cream: #FEEDC3;
+    --cream-darker: #F0A85E;
+    --light-yellow: #FFDB8B;
+    --yellow-orange: #FFA929;
+    --deep-orange: #F76D2D;
+    --deep-orange-darker: #E35411;
+    --yellow: #FCC043;
+    --yellow-darker: #CB4E00;
+    --pink: #E84759;
+    --pink-darker: #CA0219;
+    --blue: #24A4A9;
+    --blue-darker: #41727A;
+    --brown: #A93E2C;
+    --white: #FFFFFF;
+}
+
+/* 1. Reset e Padrões Globais */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    font-family: "Nunito", sans-serif;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        interpolate-size: allow-keywords;
+    }
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    line-height: 1.5;
+    background: linear-gradient(180deg, rgb(255, 203, 96), rgb(255, 231, 183) 100%);
+    overflow-x: hidden;
+    /* Previne scroll horizontal */
+}
+
+/* 2. Padrões de Elementos */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+    border: none;
+    background: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* 3. Estilos de Tipografia */
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6,
+.title {
+    font-optical-sizing: auto;
+    letter-spacing: 0.01em;
+    text-align: center;
+    overflow-wrap: break-word;
+    text-wrap: balance;
+}
+
+h1,
+.h1 {
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1.8;
+}
+
+.title {
+    font-size: 55px;
+    font-weight: 900;
+    line-height: 1.8;
+}
+
+h2,
+.h2 {
+    font-size: 35px;
+    font-weight: 900;
+    line-height: 1.8;
+}
+
+h3,
+.h3 {
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.9;
+}
+
+p,
+.p {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    text-align: left;
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+}
+
+/* 4. Classes Utilitárias */
+.text-cream {
+    color: var(--cream);
+}
+
+.text-cream-darker {
+    color: var(--cream-darker);
+}
+
+.text-light-yellow {
+    color: var(--light-yellow);
+}
+
+.text-yellow-orange {
+    color: var(--yellow-orange);
+}
+
+.text-deep-orange {
+    color: var(--deep-orange);
+}
+
+.text-deep-orange-darker {
+    color: var(--deep-orange-darker);
+}
+
+.text-yellow {
+    color: var(--yellow);
+}
+
+.text-yellow-darker {
+    color: var(--yellow-darker);
+}
+
+.text-pink {
+    color: var(--pink);
+}
+
+.text-pink-darker {
+    color: var(--pink-darker);
+}
+
+.text-blue {
+    color: var(--blue);
+}
+
+.text-blue-darker {
+    color: var(--blue-darker);
+}
+
+.text-brown {
+    color: var(--brown);
+}
+
+.text-white {
+    color: var(--white);
+}
+
+.text-align-left {
+    text-align: left !important;
+}
+
+.center-absolute {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.h-grow {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.h-grow:hover {
+    transform: scale(1.09);
+}
+
+/* 5. Componentes Principais */
+#root,
+#__next {
+    isolation: isolate;
+}
+
+.windowmain,
+.inner-grid__container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.windowmain {
+    width: 70%;
+    height: 80%;
+    background-color: var(--light-yellow);
+    border: 8px solid var(--brown);
+    border-radius: 23px;
+    padding: 4px 10px;
+    margin: 0 auto;
+}
+
+.inner-grid__container {
+    display: grid;
+    grid-template-columns: 4fr 3fr 2fr;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 20px;
+    width: 90%;
+    max-height: 80%;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+/* 6. Widgets */
+.todowidget__container,
+.stats-widget__container,
+.notes-widget__container,
+.btn-addtask,
+.btn-pomodoro {
+    border-radius: 23px;
+    padding: 1rem;
+}
+
+.todowidget__container,
+.stats-widget__container,
+.btn-pomodoro {
+    background: var(--cream);
+    box-shadow: 6px 6px 0px 0px var(--cream-darker);
+}
+
+.todowidget__container {
+    grid-area: 1 / 2 / 5 / 3;
+    min-height: 400px;
+}
+
+.stats-widget__container {
+    grid-area: 1 / 3 / 4 / 4;
+}
+
+.notes-widget__container {
+    grid-area: 4 / 3 / 7 / 4;
+    background: var(--deep-orange);
+    box-shadow: 6px 6px 0px 0px var(--deep-orange-darker);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* --- Barras de Rolagem --- */
+.todo-scroll,
+.notes-content {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 100%;
+    padding-right: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--blue) var(--cream-darker);
+}
+
+.todo-scroll::-webkit-scrollbar,
+.notes-content::-webkit-scrollbar {
+    width: 20px;
+}
+
+.todo-scroll::-webkit-scrollbar-track,
+.notes-content::-webkit-scrollbar-track {
+    background: var(--cream-darker);
+    border-radius: 10px;
+}
+
+.todo-scroll::-webkit-scrollbar-thumb,
+.notes-content::-webkit-scrollbar-thumb {
+    background-color: var(--blue);
+    border-radius: 10px;
+    border: 5px solid var(--cream-darker);
+}
+
+/* 7. Botões */
+.btn-addtask,
+.btn-pomodoro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-addtask {
+    grid-area: 5 / 2 / 6 / 3;
+    background: var(--pink);
+    box-shadow: 6px 6px 0px 0px var(--pink-darker);
+}
+
+.btn-pomodoro {
+    grid-area: 6 / 2 / 7 / 3;
+    gap: 5rem;
+}
+
+.btn-start {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    background-color: var(--deep-orange);
+}
+
+/* 8. Navbar */
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    width: 100%;
+    /* Corrigido de 100.5% */
+    border: 8px solid var(--brown);
+    border-radius: 23px 23px 0px 0px;
+    padding: 0 1rem;
+    background: var(--yellow-orange);
+    position: absolute;
+    left: 50%;
+    top: 3%;
+    transform: translate(-50%, -50%);
+}
+
+.navtitle {
+    grid-area: 1 / 2 / 2 / 3;
+    text-align: center;
+    min-height: 68px;
+}
+
+.navmenu {
+    grid-area: 1 / 3 / 2 / 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbtns {
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.dot {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    display: inline-block;
+    border-style: solid;
+    border-width: 5px;
+}
+
+.dot.blue {
+    background-color: var(--blue);
+    border-color: var(--blue-darker);
+}
+
+.dot.red {
+    background-color: var(--pink);
+    border-color: var(--pink-darker);
+}
+
+.dot.yellow {
+    background-color: var(--yellow-orange);
+    border-color: var(--yellow-darker);
+}
+
+.menu-icon span {
+    display: block;
+    width: 30px;
+    height: 10px;
+    background-color: var(--brown);
+    border-radius: 23px;
+}
+
+/* 9. Componente Tamagotchi */
+.tama-device__container {
+    grid-area: 1 / 1 / 7 / 2;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bubble-container {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+}
+
+.bubble-svg {
+    width: 70px;
+}
+
+.device-frame {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.device-svg {
+    width: 100%;
+    z-index: 1;
+}
+
+.pet-screen {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+}
+
+.pet-name {
+    display: inline-block;
+    min-width: 100px;
+    text-align: left !important;
+}
+
+.pet-svg {
+    width: 40%;
+}
+
+.device-buttons {
+    position: absolute;
+    bottom: 10%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    z-index: 3;
+}
+
+.btn-svg {
+    width: 15%;
+}
+
+/* 10. Lista de Tarefas (To-Do) */
+.todo-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.todo-item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.todo-item .checkmark {
+    height: 23px;
+    width: 23px;
+    background-color: var(--light-yellow);
+    border: 5px solid var(--yellow-darker);
+    border-radius: 100%;
+    display: inline-block;
+    flex-shrink: 0;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.todo-item input[type="checkbox"]:checked+.checkmark {
+    background-color: var(--pink);
+    border-color: var(--pink-darker);
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 14px;
+}
+
+input[type="checkbox"]:checked+.checkmark+.task-text {
+    text-decoration: line-through;
+    color: var(--deep-orange-darker);
+    opacity: 0.6;
+}
+
+/* 11. Componente de Stats */
+.stat-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-label {
+    text-align: left;
+    color: var(--deep-orange);
+}
+
+.stat-bar {
+    background-color: var(--cream-darker);
+    border-radius: 10px;
+    height: 12px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.stat-fill {
+    background-color: var(--blue);
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
+}
+
+.xp {
+    float: right;
+    color: var(--blue);
+    font-weight: 600;
+}
+
+/* --- Interação --- */
+.btn-start,
+.btn-addtask,
+.btn-svg,
+.pet-screen,
+.menu-icon,
+.fa-shuffle {
+    cursor: pointer;
+}
+
+/* 12. Responsividade */
+
+/* -- Para Tablets e Telas Menores (até 1024px) -- */
+@media (max-width: 1024px) {
+    .windowmain {
+        width: 90%;
+        height: 90%;
+    }
+
+    .inner-grid__container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        width: 95%;
+        max-height: 95%;
+    }
+
+    .tama-device__container {
+        grid-area: 1 / 1 / 2 / 3;
+        margin-bottom: 2rem;
+    }
+
+    .todowidget__container {
+        grid-area: 2 / 1 / 3 / 2;
+    }
+
+    .stats-widget__container {
+        grid-area: 2 / 2 / 3 / 3;
+    }
+
+    .btn-addtask {
+        grid-area: 3 / 1 / 4 / 2;
+    }
+
+    .btn-pomodoro {
+        grid-area: 3 / 2 / 4 / 3;
+        gap: 2rem;
+    }
+
+    .notes-widget__container {
+        grid-area: 4 / 1 / 5 / 3;
+    }
+
+    .title {
+        font-size: 48px;
+    }
+
+    h1,
+    .h1 {
+        font-size: 36px;
+    }
+
+    h2,
+    .h2 {
+        font-size: 30px;
+    }
+}
+
+/* -- Para Celulares (até 768px) -- */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .windowmain,
+    .inner-grid__container,
+    .navbar {
+        position: static;
+        transform: none;
+    }
+
+    .windowmain {
+        width: 100%;
+        min-height: 100vh;
+        border: none;
+        border-radius: 0;
+    }
+
+    .inner-grid__container {
+        grid-template-columns: 1fr;
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .inner-grid__container>* {
+        grid-area: auto !important;
+        position: static;
+        transform: none;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .navbar {
+        width: 100%;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    .navtitle {
+        min-height: auto;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+
+    h1,
+    .h1 {
+        font-size: 28px;
+    }
+
+    h2,
+    .h2 {
+        font-size: 24px;
+    }
+
+    h3,
+    .h3 {
+        font-size: 20px;
+        line-height: 1.5;
+    }
+
+    p,
+    .p {
+        font-size: 16px;
+    }
+
+    .todowidget__container {
+        min-height: 300px;
+    }
+
+    .btn-pomodoro {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .device-buttons {
+        gap: 15px;
+    }
+
+    .btn-svg {
+        width: 18%;
+    }
+}

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TamaTask WebApp</title>
+    <link rel="stylesheet" href="wireframe.css" />
+</head>
+
+<body>
+    <div class="windowmain">
+        <div class="navbar">
+            <div class="navbtns">
+                <span class="dot blue"></span>
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+            </div>
+            <div class="navtitle">
+                <h1 class="h1 text-brown">Tamatask Webapp</h1>
+            </div>
+            <div class="navmenu">
+                <div class="menu-icon h-grow" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="inner-grid__container">
+
+            <div class="tama-device__container">
+
+                <h1 class="h1 text-brown"> <i class="h-grow fa-solid fa-shuffle text-pink" onclick="shuffleName()"></i>
+                    <span id="pet-name" class="pet-name">PET NAME!</span>
+                </h1>
+
+                <div class="device-frame">
+                    <!-- moldura do Tamagotchi -->
+                    <img src="../assets/device/device.svg" alt="Tamagotchi Shell" class="device-svg" />
+
+                    <!-- pet renderizado dentro da tela -->
+                    <div class="pet-screen h-grow" onclick="petReact()">
+                        <img src="../assets/device/pet.svg" alt="Pet" class="pet-svg" />
+                    </div>
+
+                    <!-- botões do dispositivo -->
+                    <div class="device-buttons">
+                        <img src="../assets/device/sleep.svg" alt="Sleep" class="btn-svg h-grow"
+                            onclick="handleSleep()" />
+                        <img src="../assets/device/love.svg" alt="Love" class="btn-svg h-grow" onclick="handleLove()" />
+                        <img src="../assets/device/food.svg" alt="Food" class="btn-svg h-grow" onclick="handleFeed()" />
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="todowidget__container">
+                <div class="todo-scroll">
+                    <ul class="todo-list">
+                        <li>
+                            <label class="todo-item">
+                                <input type="checkbox" checked />
+                                <span class="checkmark"></span>
+                                <span class="task-text text-deep-orange h3">Task name here! :)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="todo-item">
+                                <input type="checkbox" />
+                                <span class="checkmark"></span>
+                                <span class="task-text text-deep-orange h3">Task name here! :)</span>
+                            </label>
+                        </li>
+                        <li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+
+
+            <div class="btn-addtask h-grow" onclick="handleAddTask()">
+                <h1 class="title text-yellow">ADD TASK</h1>
+            </div>
+
+            <div class="btn-pomodoro">
+                <h1 class="text-pink title">25:00</h1>
+                <button class="btn-start h-grow" onclick="handleStartTimer()">
+                    <h2 class="text-yellow">START</h2>
+                </button>
+            </div>
+
+            <div class="stats-widget__container">
+                <h2 class="h2 text-pink">STATS</h2>
+                <h3 class="text-deep-orange text-align-left">Level 5 <span class="xp text-blue h3 text-align-left"
+                        id="xp">0000xp</span></h3>
+
+                <div class="stat-line">
+                    <span class="stat-label h3">tasks</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="stat-tasks" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="stat-line">
+                    <span class="stat-label h3">focus</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="stat-focus" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="stat-line">
+                    <span class="stat-label h3">fed</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="stat-fed" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="stat-line">
+                    <span class="stat-label h3">love</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="stat-love" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="stat-line">
+                    <span class="stat-label h3">rest</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="stat-rest" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="notes-widget__container">
+                <h2 class="text-cream">NOTES</h2>
+                <div class="notes-content">
+                    <p class="p text-cream">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+    <script>
+        const stats = {
+            fed: 0,
+            rest: 0,
+            tasks: 0,
+            focus: 0,
+            love: 0
+        };
+
+        let xp = 0;
+
+        function updateStat(stat, amount) {
+            stats[stat] = Math.min(stats[stat] + amount, 100);
+            document.getElementById(`stat-${stat}`).style.width = stats[stat] + '%';
+            updateXP(amount);
+        }
+
+        function updateXP(amount) {
+            xp += amount;
+            const xpText = String(xp).padStart(4, '0');
+            document.getElementById("xp").textContent = xpText + "xp";
+        }
+
+        function handleSleep() {
+            updateStat("rest", 10);
+            alert("🛌 Tamagotchi is now sleeping!");
+        }
+
+        function handleLove() {
+            updateStat("love", 10);
+            alert("💖 Tamagotchi feels loved!");
+        }
+
+        function handleFeed() {
+            updateStat("fed", 10);
+            alert("🍽 Tamagotchi has been fed!");
+        }
+
+        function handleAddTask() {
+            const task = prompt("Escreva a nova tarefa:");
+            if (task) {
+                const list = document.querySelector(".todo-list");
+                const li = document.createElement("li");
+                li.innerHTML = `
+                    <label class="todo-item">
+                        <input type="checkbox" />
+                        <span class="checkmark"></span>
+                        <span class="task-text text-deep-orange h3">${task}</span>
+                    </label>`;
+                li.querySelector("input[type=checkbox]").addEventListener("change", function () {
+                    if (this.checked) updateStat("tasks", 10);
+                });
+                list.appendChild(li);
+            }
+        }
+
+        function handleStartTimer() {
+            updateStat("focus", 10);
+            alert("⏱️ Pomodoro started!");
+        }
+
+        document.querySelectorAll(".todo-item input[type=checkbox]").forEach(el => {
+            el.addEventListener("change", function () {
+                if (this.checked) updateStat("tasks", 10);
+            });
+        });
+
+        function toggleMenu() {
+            alert("☰ Menu toggled!");
+        }
+
+        function petReact() {
+            alert("🐾 You booped the Tama!");
+        }
+
+        function shuffleName() {
+            const names = [
+                "Bubbles", "Miki", "Neko", "Lulu", "Zuzu", "Koko", "Fafa", "Toto", "Peachy", "Momo",
+                "Pipoca", "Kiki", "Bibi", "Tama", "Chibi", "Luna", "Coco", "Nina", "Bunbun", "Pixie"
+            ];
+            const random = names[Math.floor(Math.random() * names.length)];
+            document.getElementById("pet-name").textContent = random + "!";
+        }
+    </script>
+
+
+</body>
+
+</html>
