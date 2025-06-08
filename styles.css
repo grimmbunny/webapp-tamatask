@@ -21,9 +21,10 @@
 /* ================================== */
 /* CURSORES CUSTOMIZADOS      */
 /* ================================== */
+/* DEPOIS */
 html,
 body {
-    cursor: url('./assets/others/arrow.png') 0 0, auto;
+    cursor: url('/assets/others/arrow.png') 0 0, auto;
 }
 
 a,
@@ -38,9 +39,8 @@ button,
 .todo-item,
 .modal-btn,
 .player-btn {
-    cursor: url('./assets/others/hand.png') 0 0, pointer;
+    cursor: url('/assets/others/hand.png') 0 0, pointer;
 }
-
 
 /* 1. Reset e Padrões Globais */
 *,
@@ -357,9 +357,13 @@ h3,
 
 .notes-content[contenteditable="true"]:focus,
 #pomodoro-display[contenteditable="true"]:focus {
-    outline: 3px solid var(--deep-orange-darker);
-    background-color: var(--deep-orange-darker);
+    outline: 3px solid var(--deep-orange);
+    background-color: var(--light-yellow);
     border-radius: 0.5rem;
+}
+
+.notes-content[contenteditable="true"]:focus {
+    background-color: var(--deep-orange-darker);
 }
 
 
