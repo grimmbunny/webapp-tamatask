@@ -5,26 +5,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TamaTask WebApp</title>
+    <!-- Lembre-se de que o nome do seu arquivo CSS pode ser diferente -->
     <link rel="stylesheet" href="wireframe.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
-
 
 <body>
     <div class="windowmain">
         <div class="navbar">
             <div class="navbtns">
-                <span class="dot blue"></span>
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
+                <span class="dot blue"></span><span class="dot red"></span><span class="dot yellow"></span>
             </div>
             <div class="navtitle">
                 <h1 class="h1 text-brown">Tamatask Webapp</h1>
             </div>
             <div class="navmenu">
-                <div class="menu-icon h-grow" onclick="toggleMenu()">
-                    <i class="fa-solid fa-bars"></i>
-
-                </div>
+                <button class="player-btn h-grow" id="prev-track-btn" title="Faixa Anterior">
+                    <i class="fa-solid fa-backward-step"></i>
+                </button>
+                <button class="player-btn h-grow" id="play-pause-btn" title="Tocar/Pausar">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+                <button class="player-btn h-grow" id="next-track-btn" title="Próxima Faixa">
+                    <i class="fa-solid fa-forward-step"></i>
+                </button>
+                <button class="player-btn h-grow" id="mute-btn" title="Mudo">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+                <input type="range" id="volume-slider" min="0" max="100" value="100" oninput="setVolume(this.value)">
             </div>
         </div>
 
@@ -35,22 +43,19 @@
                     <span id="pet-name" class="pet-name">PET NAME!</span>
                 </h1>
                 <div class="device-frame">
-                    <img src="https://raw.githubusercontent.com/grimmbunny/webapp-tamatask/refs/heads/main/assets/device/device.svg"
-                        alt="Tamagotchi Shell" class="device-svg" onerror="this.style.display='none'" />
+                    <img src="./assets/device/device.svg" alt="Tamagotchi Shell" class="device-svg"
+                        onerror="this.style.display='none'">
                     <div class="pet-screen" onclick="petReact()">
-                        <img src="https://raw.githubusercontent.com/grimmbunny/webapp-tamatask/refs/heads/main/assets/device/pet.svg"
-                            alt="Pet" class="pet-svg is-floating" onerror="this.style.display='none'" />
+                        <img src="./assets/device/pet.svg" alt="Pet" class="pet-svg is-floating"
+                            onerror="this.style.display='none'">
                     </div>
                     <div class="device-buttons">
-                        <img src="https://raw.githubusercontent.com/grimmbunny/webapp-tamatask/refs/heads/main/assets/device/sleep.svg"
-                            alt="Sleep" class="btn-svg h-grow" onclick="handleSleep()"
-                            onerror="this.style.display='none'" />
-                        <img src="https://raw.githubusercontent.com/grimmbunny/webapp-tamatask/refs/heads/main/assets/device/love.svg"
-                            alt="Love" class="btn-svg h-grow" onclick="handleLove()"
-                            onerror="this.style.display='none'" />
-                        <img src="https://raw.githubusercontent.com/grimmbunny/webapp-tamatask/refs/heads/main/assets/device/food.svg"
-                            alt="Food" class="btn-svg h-grow" onclick="handleFeed()"
-                            onerror="this.style.display='none'" />
+                        <img src="./assets/device/sleep.svg" alt="Sleep" class="btn-svg h-grow" onclick="handleSleep()"
+                            onerror="this.style.display='none'">
+                        <img src="./assets/device/love.svg" alt="Love" class="btn-svg h-grow" onclick="handleLove()"
+                            onerror="this.style.display='none'">
+                        <img src="./assets/device/food.svg" alt="Food" class="btn-svg h-grow" onclick="handleFeed()"
+                            onerror="this.style.display='none'">
                     </div>
                 </div>
             </div>
@@ -61,7 +66,7 @@
                     <ul class="todo-list">
                         <li>
                             <label class="todo-item">
-                                <input type="checkbox" />
+                                <input type="checkbox">
                                 <span class="checkmark"></span>
                                 <span class="task-text text-deep-orange h3">Your first task: check this! :)</span>
                             </label>
@@ -88,44 +93,35 @@
 
             <div class="stats-widget__container">
                 <h2 class="h2 text-pink">STATS</h2>
-
-                <h3 class="h3 text-deep-orange-darker" id="level-display">LEVEL1</h3>
-
-                <div class="stat-line">
-                    <span class="stat-label h3">XP</span>
+                <h3 class="h3 text-deep-orange-darker" id="level-display">LEVEL 1</h3>
+                <div class="stat-line"><span class="stat-label h3">XP</span>
                     <div class="stat-bar">
                         <div class="stat-fill stat-fill--xp" id="stat-xp" style="width: 0%;">
                             <span class="stat-bar-text" id="xp-text">0/100 xp</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="stat-line">
-                    <span class="stat-label">TASKS</span>
+                <div class="stat-line"><span class="stat-label">TASKS</span>
                     <div class="stat-bar">
                         <div class="stat-fill" id="stat-tasks" style="width: 0%"></div>
                     </div>
                 </div>
-                <div class="stat-line">
-                    <span class="stat-label">FOCUS</span>
+                <div class="stat-line"><span class="stat-label">FOCUS</span>
                     <div class="stat-bar">
                         <div class="stat-fill" id="stat-focus" style="width: 0%"></div>
                     </div>
                 </div>
-                <div class="stat-line">
-                    <span class="stat-label">FOOD</span>
+                <div class="stat-line"><span class="stat-label">FOOD</span>
                     <div class="stat-bar">
                         <div class="stat-fill" id="stat-fed" style="width: 0%"></div>
                     </div>
                 </div>
-                <div class="stat-line">
-                    <span class="stat-label">LOVE</span>
+                <div class="stat-line"><span class="stat-label">LOVE</span>
                     <div class="stat-bar">
                         <div class="stat-fill" id="stat-love" style="width: 0%"></div>
                     </div>
                 </div>
-                <div class="stat-line">
-                    <span class="stat-label">REST</span>
+                <div class="stat-line"><span class="stat-label">REST</span>
                     <div class="stat-bar">
                         <div class="stat-fill" id="stat-rest" style="width: 0%"></div>
                     </div>
@@ -134,19 +130,19 @@
 
             <div class="notes-widget__container">
                 <h2 class="text-cream">NOTES</h2>
-                <div class="notes-content" contenteditable="true">
-                    Type something!
-                </div>
+                <div class="notes-content" contenteditable="true">Type something!</div>
             </div>
         </div>
     </div>
-    <footer class="credits">
-        made with <i class="fa-solid fa-heart"></i> by flavinha
-    </footer>
 
+    <footer class="credits">made with <i class="fa-solid fa-heart"></i> by flavinha</footer>
+
+    <audio id="lofi-audio" preload="auto"></audio>
     <audio id="start-sound" src="./assets/sounds/bell-ringing-04.mp3" preload="auto"></audio>
     <audio id="end-sound" src="./assets/sounds/bell-ringing-05.mp3" preload="auto"></audio>
+
     <div id="toast-container"></div>
+
     <div id="add-task-modal" class="modal-overlay hidden">
         <div class="modal-content">
             <h2 class="h2 text-brown">Add a New Task</h2>
@@ -157,238 +153,8 @@
             </div>
         </div>
     </div>
-    <script>
-        // --- State Management ---
-        const stats = { fed: 0, rest: 0, tasks: 0, focus: 0, love: 0 };
-        let level = 1;
-        let xp = 0;
-        let xpForNextLevel = 100;
 
-        // Pomodoro State
-        let pomodoroInterval;
-        let pomodoroDuration = 25 * 60;
-        let timeLeft = pomodoroDuration;
-        let timerRunning = false;
-
-        // --- UI Elements ---
-        const levelDisplay = document.getElementById("level-display");
-        const xpBar = document.getElementById("stat-xp");
-        const xpText = document.getElementById("xp-text");
-        const pomodoroDisplay = document.getElementById("pomodoro-display");
-        const startPauseButton = document.getElementById("pomodoro-start-pause").querySelector("h2");
-        const startSound = document.getElementById("start-sound");
-        const endSound = document.getElementById("end-sound");
-
-        // --- Core Functions ---
-        function updateStat(stat, amount) {
-            stats[stat] = Math.min(stats[stat] + amount, 100);
-            const statBar = document.getElementById(`stat-${stat}`);
-            if (statBar) {
-                statBar.style.width = stats[stat] + '%';
-            }
-            if (amount > 0) {
-                updateXP(amount);
-            }
-        }
-
-        function updateXP(amount) {
-            xp += amount;
-            if (xp >= xpForNextLevel) {
-                level++;
-                xp -= xpForNextLevel;
-                xpForNextLevel = Math.round(xpForNextLevel * 1.5);
-                levelDisplay.textContent = `Level ${level}`;
-                showToast(`Level Up! You reached Level ${level}!`, 'fa-star');
-            }
-            const xpPercentage = (xp / xpForNextLevel) * 100;
-            xpBar.style.width = `${xpPercentage}%`;
-            xpText.textContent = `${xp} / ${xpForNextLevel} xp`;
-        }
-
-        function updateTimerDisplay() {
-            const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-            const seconds = String(timeLeft % 60).padStart(2, '0');
-            pomodoroDisplay.textContent = `${minutes}:${seconds}`;
-        }
-
-        // --- Event Handlers ---
-        function showToast(message, icon) {
-            const container = document.getElementById('toast-container');
-            const existingToast = container.querySelector('.toast');
-            if (existingToast) { existingToast.remove(); }
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.innerHTML = `<h2><i class="fa-solid ${icon}"></i> ${message}</h2>`;
-            container.appendChild(toast);
-            setTimeout(() => { toast.classList.add('show'); }, 10);
-            const removeToast = () => {
-                toast.classList.remove('show');
-                toast.addEventListener('transitionend', () => {
-                    if (toast.parentElement) { toast.remove(); }
-                }, { once: true });
-            };
-            setTimeout(removeToast, 3500);
-        }
-
-        // ESTA É A VERSÃO CORRETA DA FUNÇÃO
-        function handleAddTask() {
-            const modal = document.getElementById('add-task-modal');
-            const taskInput = document.getElementById('task-input');
-
-            taskInput.value = ''; // Limpa o campo de texto
-            taskInput.placeholder = "What do you need to do?"; // Reseta o placeholder
-            modal.classList.remove('hidden'); // Mostra o modal
-            taskInput.focus(); // Foca no campo de texto
-        }
-
-        function handleSleep() {
-            updateStat("rest", 10);
-            showToast("Your pet rested a bit! +10xp", "fa-bed");
-        }
-
-        function handleLove() {
-            updateStat("love", 10);
-            showToast("Lots of love for your pet! +10xp", "fa-heart");
-        }
-
-        function handleFeed() {
-            updateStat("fed", 10);
-            showToast("Your pet has been fed! +10xp", "fa-utensils");
-        }
-
-        function handleStartPauseTimer() {
-            if (timerRunning) {
-                clearInterval(pomodoroInterval);
-                timerRunning = false;
-                startPauseButton.textContent = "START";
-            } else {
-                timerRunning = true;
-                startPauseButton.textContent = "PAUSE";
-                if (timeLeft === pomodoroDuration) startSound.play();
-                pomodoroInterval = setInterval(() => {
-                    timeLeft--;
-                    updateTimerDisplay();
-                    if (timeLeft <= 0) {
-                        clearInterval(pomodoroInterval);
-                        timerRunning = false;
-                        startPauseButton.textContent = "START";
-                        updateStat("focus", 25);
-                        showToast("⏰ Focus session complete! +25xp", "fa-brain");
-                        endSound.play();
-                        timeLeft = pomodoroDuration;
-                        updateTimerDisplay();
-                    }
-                }, 1000);
-            }
-        }
-
-        function handleResetTimer() {
-            clearInterval(pomodoroInterval);
-            timerRunning = false;
-            timeLeft = pomodoroDuration;
-            updateTimerDisplay();
-            startPauseButton.textContent = "START";
-        }
-
-        function toggleMenu() {
-            alert("☰ Menu toggled!");
-        }
-
-        function petReact() {
-            const petElement = document.querySelector('.pet-svg');
-            if (petElement) {
-                petElement.classList.remove('is-floating');
-                petElement.classList.add('boop-animation');
-                petElement.addEventListener('animationend', () => {
-                    petElement.classList.remove('boop-animation');
-                    petElement.classList.add('is-floating');
-                }, { once: true });
-            }
-            updateStat("love", 5);
-            showToast("You petted your pet! +5xp", "fa-paw");
-        }
-
-        function shuffleName() {
-            const names = ["Bubbles", "Miki", "Neko", "Lulu", "Zuzu", "Koko", "Fafa", "Toto", "Peachy", "Momo", "Pipoca", "Kiki", "Bibi", "Tama", "Chibi", "Luna", "Coco", "Nina", "Bunbun", "Pixie"];
-            const randomName = names[Math.floor(Math.random() * names.length)];
-            document.getElementById("pet-name").textContent = randomName + "!";
-        }
-
-        // --- Initial Setup ---
-        function initializeApp() {
-            // Pomodoro Editável
-            const pomodoroDisplay = document.getElementById("pomodoro-display");
-            pomodoroDisplay.addEventListener('focus', () => {
-                if (timerRunning) { handleStartPauseTimer(); }
-            });
-            pomodoroDisplay.addEventListener('blur', () => {
-                let newMinutes = parseInt(pomodoroDisplay.textContent.trim(), 10);
-                if (isNaN(newMinutes) || newMinutes <= 0 || newMinutes > 999) { newMinutes = 25; }
-                pomodoroDuration = newMinutes * 60;
-                timeLeft = pomodoroDuration;
-                updateTimerDisplay();
-            });
-            pomodoroDisplay.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    pomodoroDisplay.blur();
-                }
-            });
-
-            // Tarefas já existentes
-            document.querySelectorAll(".todo-list .todo-item input[type=checkbox]").forEach(el => {
-                el.addEventListener("change", function () {
-                    if (this.checked) {
-                        updateStat("tasks", 20);
-                        showToast("Task completed! +20xp", "fa-check");
-                    }
-                });
-            });
-
-            // Modal de Adicionar Tarefa
-            const addTaskModal = document.getElementById('add-task-modal');
-            const confirmBtn = document.getElementById('confirm-add-task');
-            const cancelBtn = document.getElementById('cancel-add-task');
-            const taskInput = document.getElementById('task-input');
-
-            function hideAddTaskModal() {
-                addTaskModal.classList.add('hidden');
-            }
-
-            confirmBtn.addEventListener('click', () => {
-                const taskText = taskInput.value;
-                if (taskText && taskText.trim() !== "") {
-                    const list = document.querySelector(".todo-list");
-                    const li = document.createElement("li");
-                    li.innerHTML = `<label class="todo-item"><input type="checkbox" /><span class="checkmark"></span><span class="task-text text-deep-orange h3">${taskText.trim()}</span></label>`;
-                    li.querySelector("input[type=checkbox]").addEventListener("change", function () {
-                        if (this.checked) {
-                            updateStat("tasks", 20);
-                            showToast("Task completed! +20xp", "fa-check");
-                        }
-                    });
-                    list.appendChild(li);
-                    hideAddTaskModal();
-                } else {
-                    taskInput.placeholder = "Please write a task first!";
-                }
-            });
-
-            cancelBtn.addEventListener('click', hideAddTaskModal);
-            addTaskModal.addEventListener('click', (e) => {
-                if (e.target === addTaskModal) { hideAddTaskModal(); }
-            });
-            taskInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') { confirmBtn.click(); }
-            });
-
-            // Estado inicial da UI
-            levelDisplay.textContent = `Level ${level}`;
-            updateXP(0);
-        }
-
-        initializeApp();
-    </script>
+    <script src="app.js"></script>
 </body>
 
 </html>

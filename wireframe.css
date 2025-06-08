@@ -2,7 +2,6 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
 
 :root {
-    /* Cores */
     --cream: #FEEDC3;
     --cream-darker: #F0A85E;
     --light-yellow: #FFDB8B;
@@ -19,6 +18,30 @@
     --white: #FFFFFF;
 }
 
+/* ================================== */
+/* CURSORES CUSTOMIZADOS      */
+/* ================================== */
+html,
+body {
+    cursor: url('./assets/others/arrow.png') 0 0, auto;
+}
+
+a,
+button,
+.h-grow,
+.pomodoro-btn,
+.btn-addtask,
+.btn-svg,
+.pet-screen,
+.menu-icon,
+.fa-shuffle,
+.todo-item,
+.modal-btn,
+.player-btn {
+    cursor: url('./assets/others/hand.png') 0 0, pointer;
+}
+
+
 /* 1. Reset e Padrões Globais */
 *,
 *::before,
@@ -31,14 +54,11 @@
 html {
     -webkit-font-smoothing: antialiased;
     font-family: "Nunito", sans-serif;
-    /* Define o tamanho da fonte base para 100% (geralmente 16px), 
-       permitindo que 'rem' funcione de forma previsível. */
     font-size: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
     html {
-        /* Enable smooth scrolling when the user has no reduced-motion preference */
         scroll-behavior: smooth;
     }
 }
@@ -49,7 +69,6 @@ body {
     line-height: 1.5;
     background: linear-gradient(180deg, rgb(255, 203, 96), rgb(255, 231, 183) 100%);
     overflow-x: hidden;
-    /* Previne scroll horizontal */
 }
 
 /* 2. Padrões de Elementos */
@@ -71,8 +90,14 @@ select {
     background: none;
 }
 
-button {
-    cursor: pointer;
+p,
+.p {
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    text-align: left;
+    overflow-wrap: break-word;
+    text-wrap: pretty;
 }
 
 /* 3. Estilos de Tipografia */
@@ -94,48 +119,30 @@ h6,
     text-align: center;
     overflow-wrap: break-word;
     text-wrap: balance;
+    font-weight: 900;
 }
 
 h1,
 .h1 {
-    font-size: 2.5rem;
-    /* 40px */
-    font-weight: 900;
-    line-height: 1.8;
+    font-size: clamp(1.8rem, 1.5rem + 2.5vw, 2.5rem);
+    line-height: 1.2;
 }
 
 .title {
-    font-size: 3.4375rem;
-    /* 55px */
-    font-weight: 900;
-    line-height: 1.8;
+    font-size: clamp(2.5rem, 2rem + 3vw, 3.4375rem);
+    line-height: 1.2;
 }
 
 h2,
 .h2 {
-    font-size: 2.1875rem;
-    /* 35px */
-    font-weight: 900;
-    line-height: 1.8;
+    font-size: clamp(1.5rem, 1.2rem + 2vw, 2.1875rem);
+    line-height: 1.3;
 }
 
 h3,
 .h3 {
-    font-size: 1.5625rem;
-    /* 25px */
-    font-weight: 900;
-    line-height: 1.9;
-}
-
-p,
-.p {
-    font-size: 1.25rem;
-    /* 20px */
-    font-weight: 900;
-    letter-spacing: 0.01em;
-    text-align: left;
-    overflow-wrap: break-word;
-    text-wrap: pretty;
+    font-size: clamp(1.25rem, 1rem + 1.5vw, 1.5625rem);
+    line-height: 1.4;
 }
 
 /* 4. Classes Utilitárias */
@@ -199,15 +206,7 @@ p,
     text-align: left !important;
 }
 
-.center-absolute {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
 .h-grow {
-    cursor: pointer;
     transition: transform 0.2s ease-in-out;
 }
 
@@ -216,60 +215,43 @@ p,
 }
 
 /* 5. Componentes Principais */
-#root,
-#__next {
-    isolation: isolate;
-}
-
 .windowmain {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 70%;
-    height: 80%;
+    width: 90vw;
+    max-width: 1400px;
+    height: 90vh;
+    max-height: 850px;
     background-color: var(--light-yellow);
-
-    /* MUDANÇA: A borda superior foi removida */
     border-width: 0 0.5rem 0.5rem 0.5rem;
     border-style: solid;
     border-color: var(--brown);
-
-    /* MUDANÇA: O raio da borda superior foi removido */
     border-radius: 1rem;
-
-    /* MUDANÇA: O padding foi removido (será adicionado ao grid interno) */
     padding: 0;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .inner-grid__container {
     display: grid;
-    grid-template-columns: 4fr 3fr 2fr;
+    grid-template-columns: 4fr 3fr 3fr;
     grid-template-rows: repeat(6, 1fr);
     gap: 1.25rem;
-    position: absolute;
-
-    margin: 1rem 0;
-    /* Usamos absolute para preencher a janela */
-    width: 100%;
-    height: 95%;
-    top: 2%;
-    left: 0;
-    overflow: scroll;
-
-    /* MUDANÇA: Adicionado padding para não ficar atrás da navbar */
-    padding: 5rem 1rem 1rem 1rem;
+    padding: 1.5rem;
+    flex-grow: 1;
+    overflow-y: auto;
+    min-height: 0;
 }
 
-/* 6. Widgets */
+/* 6. Widgets (Grid areas permanecem aqui) */
 .todowidget__container,
 .stats-widget__container,
 .notes-widget__container,
 .btn-addtask,
 .btn-pomodoro {
     border-radius: 1.4375rem;
-    /* 23px */
     padding: 1rem;
 }
 
@@ -278,149 +260,125 @@ p,
 .btn-pomodoro {
     background: var(--cream);
     box-shadow: 0.375rem 0.375rem 0 0 var(--cream-darker);
-    /* 6px 6px */
 }
 
-/* Correção de Layout do Pomodoro */
-.btn-pomodoro .title {
-    font-size: 2rem;
-    /* 32px */
-    line-height: 1;
-}
-
-.pomodoro-btn h2 {
-    font-size: 1.25rem;
-    /* 20px */
-    line-height: 1;
-}
-
+/* MUDANÇA: Reorganização das áreas do grid para balancear a altura */
 .todowidget__container {
     grid-area: 1 / 2 / 5 / 3;
     min-height: 18.75rem;
-    /* 300px */
-}
-
-.stats-widget__container {
-    grid-area: 1 / 3 / 5 / 4;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    min-height: 18.75rem;
-    /* 300px */
-}
-
-.notes-widget__container {
-    grid-area: 5 / 3 / 7 / 4;
-    background: var(--deep-orange);
-    box-shadow: 0.375rem 0.375rem 0 0 var(--deep-orange-darker);
-    /* 6px 6px */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-/* --- Barras de Rolagem --- */
-.todo-scroll,
-.notes-content {
-    flex: 1;
-    overflow-y: auto;
-    max-height: 100%;
-    scrollbar-width: thin;
-    scrollbar-color: var(--blue) var(--cream-darker);
-    overflow-wrap: break-word;
-    word-break: break-word;
-}
-
-.todo-scroll {
-    padding-right: 1rem;
-}
-
-.todo-scroll::-webkit-scrollbar,
-.notes-content::-webkit-scrollbar {
-    width: 1.25rem;
-    /* 20px */
-}
-
-.todo-scroll::-webkit-scrollbar-track,
-.notes-content::-webkit-scrollbar-track {
-    background: var(--cream-darker);
-    border-radius: 0.625rem;
-    /* 10px */
-}
-
-.todo-scroll::-webkit-scrollbar-thumb,
-.notes-content::-webkit-scrollbar-thumb {
-    background-color: var(--blue);
-    border-radius: 0.625rem;
-    /* 10px */
-    border: 0.3125rem solid var(--cream-darker);
-    /* 5px */
 }
 
 .btn-addtask {
     grid-area: 5 / 2 / 6 / 3;
     background: var(--pink);
     box-shadow: 0.375rem 0.375rem 0 0 var(--pink-darker);
-    /* 6px 6px */
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 4.375rem;
-    /* 70px */
 }
 
 .btn-pomodoro {
     grid-area: 6 / 2 / 7 / 3;
     display: flex;
     flex-direction: row;
-    /* Alterado de 'column' para 'row' */
     align-items: center;
-    /* Alinha o timer e os botões verticalmente */
     justify-content: center;
-    /* Centraliza o conteúdo no container */
     gap: 1rem;
-    /* Espaço entre o timer e os botões */
-    min-height: 4.375rem;
-    background: var(--cream);
-    box-shadow: 0.375rem 0.375rem 0 0 var(--cream-darker);
-    border-radius: 1.4375rem;
-    padding: 1rem;
 }
 
-.pomodoro-buttons {
+.stats-widget__container {
+    grid-area: 1 / 3 / 4 / 4;
     display: flex;
-    gap: 1rem;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 18.75rem;
+}
+
+.notes-widget__container {
+    grid-area: 4 / 3 / 7 / 4;
+    background: var(--deep-orange);
+    box-shadow: 0.375rem 0.375rem 0 0 var(--deep-orange-darker);
+    display: flex;
+    flex-direction: column;
 }
 
 .pomodoro-btn {
     padding: 0.5rem 1rem;
     border-radius: 0.625rem;
-    /* 10px */
     background-color: var(--deep-orange);
 }
+
+.pomodoro-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+/* 7. Conteúdo Interno dos Widgets */
+.todo-scroll,
+.notes-content {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.todo-scroll {
+    padding-right: 1rem;
+    scrollbar-color: var(--blue) var(--cream-darker);
+}
+
+.todo-scroll::-webkit-scrollbar,
+.notes-content::-webkit-scrollbar {
+    width: 1.25rem;
+}
+
+.todo-scroll::-webkit-scrollbar-track,
+.notes-content::-webkit-scrollbar-track {
+    background: var(--cream-darker);
+    border-radius: 0.625rem;
+}
+
+.todo-scroll::-webkit-scrollbar-thumb,
+.notes-content::-webkit-scrollbar-thumb {
+    background-color: var(--blue);
+    border-radius: 0.625rem;
+    border: 0.3125rem solid var(--cream-darker);
+}
+
+.notes-content {
+    background-color: transparent;
+    color: var(--cream);
+    padding: 0 0.5rem;
+    border-radius: 1rem;
+    height: 100%;
+}
+
+.notes-content[contenteditable="true"]:focus,
+#pomodoro-display[contenteditable="true"]:focus {
+    outline: 3px solid var(--deep-orange-darker);
+    background-color: var(--deep-orange-darker);
+    border-radius: 0.5rem;
+}
+
 
 /* 8. Navbar */
 .navbar {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
     border: 0.5rem solid var(--brown);
     border-radius: 1rem 1rem 0 0;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
     background: var(--yellow-orange);
-
-    /* MUDANÇA: Posicionamento simplificado para preencher o topo */
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    /* As propriedades 'transform' e 'left: 50%' foram removidas */
+    min-height: 5.25rem;
+    z-index: 10;
+    flex-shrink: 0;
 }
 
 .navtitle {
     grid-area: 1 / 2 / 2 / 3;
-    text-align: center;
-    min-height: 4.25rem;
-    /* 68px */
 }
 
 .navmenu {
@@ -428,6 +386,7 @@ p,
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    gap: 0.5rem;
 }
 
 .navbtns {
@@ -438,15 +397,12 @@ p,
 }
 
 .dot {
-    width: 2.1875rem;
-    /* 35px */
-    height: 2.1875rem;
-    /* 35px */
-    border-radius: 100%;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
     display: inline-block;
     border-style: solid;
-    border-width: 0.3125rem;
-    /* 5px */
+    border-width: 0.25rem;
 }
 
 .dot.blue {
@@ -464,42 +420,64 @@ p,
     border-color: var(--yellow-darker);
 }
 
-/* Estilo para o novo ícone de menu do Font Awesome */
-.menu-icon .fa-bars {
-    font-size: 2.5rem;
-    /* Controle o tamanho do ícone aqui */
+.player-btn {
+    font-size: 1.25rem;
     color: var(--brown);
-    /* Define a cor do ícone */
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
+    transition: background-color 0.2s;
 }
+
+.player-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80px;
+    height: 8px;
+    background: var(--blue);
+    border-radius: 5px;
+    outline: none;
+    transition: opacity 0.2s;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--pink);
+    border: 3px solid var(--white);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#volume-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--pink);
+    border: 3px solid var(--white);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 
 /* 9. Componente Tamagotchi */
 .tama-device__container {
-    grid-area: 1 / 1 / 8 / 2;
+    grid-area: 1 / 1 / 7 / 2;
     padding: 1rem;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.tama-device__container h1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.bubble-container {
-    position: absolute;
-    top: -1.25rem;
-    /* -20px */
-    left: 1.25rem;
-    /* 20px */
-}
-
-.bubble-svg {
-    width: 4.375rem;
-    /* 70px */
+    align-self: center;
 }
 
 .device-frame {
@@ -524,13 +502,6 @@ p,
     z-index: 2;
 }
 
-.pet-name {
-    display: inline-block;
-    min-width: 6.25rem;
-    /* 100px */
-    text-align: center;
-}
-
 .pet-svg {
     width: 40%;
 }
@@ -540,7 +511,6 @@ p,
     bottom: 10%;
     display: flex;
     gap: 1.25rem;
-    /* 20px */
     justify-content: center;
     width: 100%;
     z-index: 3;
@@ -558,8 +528,6 @@ p,
     gap: 0.75rem;
     padding: 0rem 0.5rem;
     font-size: 1.125rem;
-
-    /* 18px */
     font-weight: 700;
 }
 
@@ -567,10 +535,8 @@ p,
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    cursor: pointer;
     user-select: none;
     position: relative;
-
 }
 
 .todo-item input[type="checkbox"] {
@@ -581,12 +547,9 @@ p,
 
 .todo-item .checkmark {
     height: 1.4375rem;
-    /* 23px */
     width: 1.4375rem;
-    /* 23px */
     background-color: var(--light-yellow);
     border: 0.3125rem solid var(--yellow-darker);
-    /* 5px */
     border-radius: 100%;
     display: inline-flex;
     align-items: center;
@@ -605,31 +568,25 @@ p,
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     font-size: 0.875rem;
-    /* 14px */
     color: var(--white);
 }
 
-input[type="checkbox"]:checked+.checkmark+.task-text {
+.task-text {
+    line-height: 1.5;
+    font-size: clamp(0.9rem, 0.8rem + 0.5vw, 1.1rem);
+    overflow-wrap: break-word;
+    word-break: break-word;
+    min-width: 0;
+    text-align: left;
+}
+
+input[type="checkbox"]:checked~.task-text {
     text-decoration: line-through;
     color: var(--deep-orange-darker);
     opacity: 0.6;
 }
 
-.task-text {
-    line-height: 2rem !important;
-    font-size: 1.02rem;
-    /* Permite que o texto quebre e não estique o container */
-    overflow-wrap: break-word;
-    word-break: break-word;
-
-    /* Um truque essencial para o flexbox: permite que o item encolha abaixo do seu conteúdo mínimo */
-    min-width: 0;
-
-    /* Garante que o texto fique alinhado à esquerda, o que é melhor para múltiplas linhas */
-    text-align: left;
-}
-
-/* Garante o alinhamento vertical da linha inteira */
+/* 11. Barras de Stats */
 .stat-line {
     display: flex;
     align-items: center;
@@ -639,115 +596,44 @@ input[type="checkbox"]:checked+.checkmark+.task-text {
 .stat-label {
     text-align: left;
     color: var(--deep-orange);
-
+    font-weight: 900;
 }
 
-/* A barra de fundo, que servirá de container para o texto */
 .stat-bar {
     position: relative;
-    /* Essencial para posicionar o texto sobre a barra */
     background-color: var(--cream-darker);
     border-radius: 1rem;
     height: 1.5rem;
-    /* Altura que acomoda o texto */
     width: 100%;
     overflow: hidden;
 }
 
-/* A parte colorida (preenchimento), agora não contém mais o texto */
 .stat-fill {
     height: 100%;
     border-radius: 1rem;
     transition: width 0.5s ease-in-out;
-}
-
-
-/* Cor rosa para a barra de XP */
-.stat-fill--xp {
-    background-color: var(--pink);
-}
-
-/* Cor azul padrão para as outras barras */
-.stat-fill {
     background-color: var(--blue);
 }
 
-/* --- NOVAS REGRAS --- */
-
-/* Cor rosa para a barra de XP */
 .stat-fill--xp {
     background-color: var(--pink);
 }
 
-/* Estilo para o texto dentro da barra de progresso */
-/* O texto, agora posicionado sobre a .stat-bar inteira */
 .stat-bar-text {
     position: absolute;
-    /* Posicionado em relação à .stat-bar */
     width: 100%;
-    /* Ocupa toda a largura da barra */
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    /* Centraliza verticalmente */
     text-align: center;
-    /* Centraliza o texto */
-
     font-size: 0.875rem;
     font-weight: 800;
     color: var(--white);
-
     z-index: 2;
-    /* Garante que o texto fique na frente de tudo */
     pointer-events: none;
-    /* Impede que o texto bloqueie cliques */
 }
 
-/* Remove a formatação antiga da classe .xp que não é mais necessária */
-.xp {
-    float: none;
-    font-weight: normal;
-}
-
-
-.stats-widget__container>.h2 {
-    font-size: 1.875rem;
-    /* 30px */
-    line-height: 1.2;
-    margin-bottom: 0.25rem;
-}
-
-.stats-widget__container>.h3 {
-    font-size: 1.25rem;
-    /* 20px */
-    line-height: 1.2;
-}
-
-.stats-widget__container .xp {
-    font-size: 1.25rem;
-    /* 20px */
-}
-
-.stats-widget__container .stat-label {
-    font-size: 1rem;
-    /* 20px */
-    font-weight: 900;
-}
-
-.notes-content {
-    background-color: transparent;
-    color: var(--cream);
-    padding: 0 0.5rem;
-    border-radius: 1rem;
-    height: 100%;
-}
-
-.notes-content[contenteditable="true"]:focus {
-    outline: 2px solid var(--deep-orange-darker);
-    background-color: var(--deep-orange-darker);
-}
-
-/* --- Estilos do Modal de Adicionar Tarefa --- */
+/* 12. Componentes de UI (Modal, Toast) */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -822,8 +708,6 @@ input[type="checkbox"]:checked+.checkmark+.task-text {
     border-radius: 1rem;
     font-size: 1.25rem;
     font-weight: 800;
-    border: none;
-    cursor: pointer;
     color: var(--white);
 }
 
@@ -847,75 +731,42 @@ input[type="checkbox"]:checked+.checkmark+.task-text {
     box-shadow: 0 2px 0 0 var(--deep-orange-darker);
 }
 
-/* Classe para esconder o modal */
-.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-
-/* Adicione este estilo para o timer editável */
-#pomodoro-display[contenteditable="true"]:focus {
-    outline: 3px solid var(--pink-darker);
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 0.5rem;
-}
-
-/* --- Toast Notification (Novo Estilo) --- */
 #toast-container {
-    position: absolute;
-    /* Relativo ao .windowmain */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
-    /* Centraliza o toast horizontalmente */
     padding: 2rem;
-    /* Espaço do topo da janela */
-    z-index: 1000;
+    z-index: 3000;
     pointer-events: none;
-    /* Permite clicar através do container */
 }
 
 .toast {
-    /* Mantendo seu estilo de cores */
     background: var(--cream);
     color: var(--brown);
     padding: 1rem 2rem;
     border-radius: 1.4375rem;
-    /* 23px */
     pointer-events: auto;
-    /* Permite clicar no próprio toast */
-
-    /* Nova sombra suave */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-
-    /* Estado inicial da animação (invisível e um pouco acima) */
     opacity: 0;
     visibility: hidden;
     transform: translateY(-20px);
-
-    /* Animação suave com transition */
     transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
 }
 
-
-/* Estado visível do toast */
 .toast.show {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    /* Volta para a posição original */
 }
 
-/* Estilo para o conteúdo do toast */
 .toast h2 {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     font-size: 1.5rem;
-    /* Ajuste de tamanho se necessário */
     font-weight: 800;
 }
 
@@ -923,49 +774,14 @@ input[type="checkbox"]:checked+.checkmark+.task-text {
     color: var(--pink);
 }
 
-
-@keyframes slide-in {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-}
-
-@keyframes slide-out {
-    from {
-        transform: translateY(0);
-    }
-
-    to {
-        transform: translateY(100%);
-    }
-}
-
-.slide-in {
-    animation: slide-in 1s;
-}
-
-.slide-out {
-    animation: slide-out 1s;
-}
-
-
-/* --- Animações --- */
-.is-floating {
-    animation-name: floating;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-}
-
+/* 14. Animações */
 @keyframes floating {
     0% {
         transform: translateY(0);
     }
 
     50% {
-        transform: translateY(0.75rem);
-        /* Move o pet 12px para baixo */
+        transform: translateY(0.5rem);
     }
 
     100% {
@@ -973,15 +789,21 @@ input[type="checkbox"]:checked+.checkmark+.task-text {
     }
 }
 
+.is-floating {
+    animation: floating 3s infinite ease-in-out;
+}
 
-/* Animação para o clique (boop) */
-@keyframes boop {
+@keyframes heartbeat {
     0% {
         transform: scale(1);
     }
 
-    50% {
-        transform: scale(0.9);
+    10% {
+        transform: scale(1.08);
+    }
+
+    20% {
+        transform: scale(1);
     }
 
     100% {
@@ -989,42 +811,62 @@ input[type="checkbox"]:checked+.checkmark+.task-text {
     }
 }
 
-.boop-animation {
-    animation: boop 0.3s ease-in-out;
+@keyframes rainbow-flash {
+    0% {
+        filter: hue-rotate(0deg) saturate(1.5) brightness(1.1);
+    }
+
+    100% {
+        filter: hue-rotate(360deg) saturate(1.5) brightness(1.1);
+    }
+}
+
+@keyframes flash-effect {
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.level-up-animation {
+    animation: rainbow-flash 1.5s ease-in-out, flash-effect 0.25s 6;
+}
+
+/* 15. Rodapé de Créditos */
+.credits {
+    position: fixed;
+    z-index: 50;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 700;
+    color: var(--brown);
+}
+
+.credits .fa-heart {
+    color: var(--pink);
+    margin: 0 0.25rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
 }
 
 
-/* --- Interação --- */
-.btn-start,
-.pomodoro-btn,
-.btn-addtask,
-.btn-svg,
-.pet-screen,
-.menu-icon,
-.fa-shuffle {
-    cursor: pointer;
-}
+/* ================================== */
+/* 16. RESPONSIVIDADE                 */
+/* ================================== */
 
-/* 12. Responsividade */
-/* Usando 'em' para media queries para melhor acessibilidade */
+/* -- TABLET (e telas menores de desktop) -- */
 @media (max-width: 64em) {
 
     /* 1024px */
-    .windowmain {
-        width: 90%;
-        height: 90%;
-    }
-
     .inner-grid__container {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
-        width: 95%;
-        height: 90%;
     }
 
     .tama-device__container {
         grid-area: 1 / 1 / 2 / 3;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
     .todowidget__container {
@@ -1041,31 +883,14 @@ input[type="checkbox"]:checked+.checkmark+.task-text {
 
     .btn-pomodoro {
         grid-area: 3 / 2 / 4 / 3;
-        gap: 2rem;
     }
 
     .notes-widget__container {
         grid-area: 4 / 1 / 5 / 3;
     }
-
-    .title {
-        font-size: 3rem;
-        /* 48px */
-    }
-
-    h1,
-    .h1 {
-        font-size: 2.25rem;
-        /* 36px */
-    }
-
-    h2,
-    .h2 {
-        font-size: 1.875rem;
-        /* 30px */
-    }
 }
 
+/* -- CELULAR (Layout de coluna única) -- */
 @media (max-width: 48em) {
 
     /* 768px */
@@ -1074,148 +899,83 @@ input[type="checkbox"]:checked+.checkmark+.task-text {
         min-height: 100vh;
     }
 
-    .windowmain,
-    .inner-grid__container,
-    .navbar {
+    .windowmain {
+        display: block;
         position: static;
         transform: none;
-
-    }
-
-    .windowmain {
         width: 100%;
+        height: auto;
         min-height: 100vh;
         border: none;
         border-radius: 0;
     }
 
+    .navbar {
+        position: static;
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+        padding: 0 1rem;
+    }
+
     .inner-grid__container {
         grid-template-columns: 1fr;
-        width: 100%;
         height: auto;
-        padding: 1rem;
-        gap: 1rem;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        padding: 1.5rem;
     }
 
     .inner-grid__container>* {
         grid-area: auto !important;
+        /* Força o empilhamento */
+    }
+
+    .todowidget__container,
+    .stats-widget__container {
+        min-height: 20rem;
+    }
+
+    .credits {
         position: static;
-        transform: none;
-        width: 100%;
-        margin-bottom: 1rem;
+        padding: 1.5rem;
     }
+}
 
+/* -- CELULAR PEQUENO (Ajustes finos) -- */
+@media (max-width: 30em) {
+
+    /* 480px */
     .navbar {
-        width: 100%;
-        border-radius: 0;
-        border-left: none;
-        border-right: none;
-    }
-
-    .navtitle {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "title"
+            "buttons"
+            "menu";
+        justify-items: center;
+        padding: 0.5rem;
+        gap: 0.5rem;
         min-height: auto;
     }
 
-    .title {
-        font-size: 2rem;
-        /* 32px */
+    .navtitle {
+        grid-area: title;
+        min-height: auto;
     }
 
-    h1,
-    .h1 {
-        font-size: 1.75rem;
-        /* 28px */
+    .navbtns {
+        grid-area: buttons;
     }
 
-    h2,
-    .h2 {
-        font-size: 1.5rem;
-        /* 24px */
+    .navmenu {
+        grid-area: menu;
+        justify-content: center;
     }
 
-    h3,
-    .h3 {
-        font-size: 1.25rem;
-        /* 20px */
-        line-height: 1.5;
+    .btn-pomodoro {
+        flex-direction: column;
+        gap: 0.5rem;
     }
 
-    p,
-    .p {
-        font-size: 1rem;
-        /* 16px */
-    }
-
-    .todowidget__container {
-        min-height: 25rem;
-        /* 400px */
-    }
-
-
-
-    .btn-addtask {
-        min-height: 4.375rem;
-        /* 70px */
-    }
-
-    .device-buttons {
-        gap: 0.9375rem;
-        /* 15px */
-    }
-
-    .btn-svg {
-        width: 18%;
-    }
-}
-
-/* --- Rodapé de Créditos --- */
-.credits {
-    position: fixed;
-    /* Deixa o rodapé fixo na tela */
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 1.25rem;
-    /* Espaçamento interno */
-    text-align: center;
-    font-size: 1.125rem;
-    /* Tamanho da fonte (18px) */
-    font-weight: 700;
-    color: var(--brown);
-    /* Cor do texto */
-    z-index: 50;
-    /* Garante que fique visível, mas abaixo de popups */
-}
-
-/* Estilo para o ícone de coração */
-.credits .fa-heart {
-    color: var(--pink);
-    /* Cor do coração */
-    margin: 0 0.25rem;
-    /* Pequeno espaço dos lados */
-    animation: heartbeat 1.5s ease-in-out infinite;
-    /* Animação de pulsar */
-}
-
-/* Animação de pulsar para o coração */
-@keyframes heartbeat {
-    0% {
-        transform: scale(1);
-    }
-
-    10% {
-        transform: scale(1.08);
-    }
-
-    20% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1);
+    .tama-device__container {
+        padding: 0;
     }
 }
