@@ -1171,3 +1171,51 @@ input[type="checkbox"]:checked+.checkmark+.task-text {
         width: 18%;
     }
 }
+
+/* --- Rodapé de Créditos --- */
+.credits {
+    position: fixed;
+    /* Deixa o rodapé fixo na tela */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.25rem;
+    /* Espaçamento interno */
+    text-align: center;
+    font-size: 1.125rem;
+    /* Tamanho da fonte (18px) */
+    font-weight: 700;
+    color: var(--brown);
+    /* Cor do texto */
+    z-index: 50;
+    /* Garante que fique visível, mas abaixo de popups */
+}
+
+/* Estilo para o ícone de coração */
+.credits .fa-heart {
+    color: var(--pink);
+    /* Cor do coração */
+    margin: 0 0.25rem;
+    /* Pequeno espaço dos lados */
+    animation: heartbeat 1.5s ease-in-out infinite;
+    /* Animação de pulsar */
+}
+
+/* Animação de pulsar para o coração */
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+
+    10% {
+        transform: scale(1.08);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
